@@ -3,54 +3,87 @@
 
 # Sets the minimum version of CMake required to build the native library.
 
-cmake_minimum_required(VERSION 3.10.2)
-
-# Declares and names the project.
-
-project("ndkdemo")
-
+cmake_minimum_required(VERSION 3.4.1)
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
+set(var hello)
+message(${var})
+set(var 1111)
+message(${var})
+
+#CMAKE 文件路径
+message(${CMAKE_CURRENT_LIST_FILE})
+#CMAKE 文件夹的路径
+message(${CMAKE_CURRENT_LIST_DIR})
+
+IF(TRUE)
+    message(THIS IS  TRUE)
+    ENDIF()
+
+#  STATIC 静态库   SHARED 动态库
 
 add_library( # Sets the name of the library.
-        ndkdemo
+             native-lib
+             # Sets the library as a shared library.
+             SHARED
+             # Provides a relative path to your source file(s).
+             native-lib.cpp
+        )
 
-        # Sets the library as a shared library.
+add_library(people-lib
         SHARED
+        people/people.cpp)
 
-        # Provides a relative path to your source file(s).
-        native-lib.cpp)
-
+add_library(base-lib
+        SHARED
+        base/base.cpp
+        base/jvm.cpp
+        )
 add_library(
-    people-lib
+     #Sets the name of Library
+        dynamic-lib
+     #Sets the library as shared library
     SHARED
-    people/people.cpp
+    #Provides a relative path to your source files
+    jni/jni_onload.cpp
+#    jni/jni_invoke_method.cpp
+#    thread/jni_thread.cpp
 )
-
-include_directories(people/)
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
 # default, you only need to specify the name of the public NDK library
 # you want to add. CMake verifies that the library exists before
 # completing its build.
-
 find_library( # Sets the name of the path variable.
-        log-lib
+              log-lib
+              # Specifies the name of the NDK library that
+              # you want CMake to locate.
+              log )
 
-        # Specifies the name of the NDK library that
-        # you want CMake to locate.
-
-        log)
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_LIST_DIR}/people/)
+include_directories(${CMAKE_SOURCE_DIR}/base/)
+#
+#ADD_EXECUTABLE(people People.h)
+#INCLUDE_DIRECTORIES(/tmp/include/hello)
+#
+#find_library(LIBHELLO_PATH hello /tmp/lib)
+#IF(NOT LIBHELLO_PATH)
+#    MESSAGE(FATAL_ERROR "libhello not found")
+#ENDIF(NOT LIBHELLO_PATH)
+#
+#MESSAGE(STATUS ${LIBHELLO_PATH} " found")
+#TARGET_LINK_LIBRARIES(main ${LIBHELLO_PATH})
 
 # Specifies libraries CMake should link to your target library. You
 # can link multiple libraries, such as libraries you define in this
 # build script, prebuilt third-party libraries, or system libraries.
-
 target_link_libraries( # Specifies the target library.
-        ndkdemo
-        people-lib
+                       native-lib
+                       dynamic-lib
+                       people-lib
+                       base-lib
         # Links the target library to the log library
-        # included in the NDK.
-        ${log-lib})
+                       # included in the NDK.
+                       ${log-lib} )
