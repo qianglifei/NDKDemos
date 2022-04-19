@@ -43,7 +43,7 @@ add_library(base-lib
         )
 add_library(
      #Sets the name of Library
-        dynamic-lib
+    dynamic-lib
      #Sets the library as shared library
     SHARED
     #Provides a relative path to your source files
@@ -51,6 +51,12 @@ add_library(
 #    jni/jni_invoke_method.cpp
 #    thread/jni_thread.cpp
 )
+add_library(
+      basic-lib
+      SHARED
+      jni/jni_basic_type.cpp
+)
+
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
 # default, you only need to specify the name of the public NDK library
@@ -63,7 +69,7 @@ find_library( # Sets the name of the path variable.
               log )
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_LIST_DIR}/people/)
-include_directories(${CMAKE_SOURCE_DIR}/base/)
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_LIST_DIR}/base/)
 #
 #ADD_EXECUTABLE(people People.h)
 #INCLUDE_DIRECTORIES(/tmp/include/hello)
@@ -81,9 +87,10 @@ include_directories(${CMAKE_SOURCE_DIR}/base/)
 # build script, prebuilt third-party libraries, or system libraries.
 target_link_libraries( # Specifies the target library.
                        native-lib
+                       basic-lib
+                       base-lib
                        dynamic-lib
                        people-lib
-                       base-lib
         # Links the target library to the log library
                        # included in the NDK.
                        ${log-lib} )

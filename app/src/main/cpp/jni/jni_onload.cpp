@@ -1,8 +1,9 @@
 #include <jni.h>
 #include <jvm.h>
 #include <base.h>
+#include <android/log.h>
 #define JAVA_CLASS "com/bksx/mobile/terminal/ndkdemo/JNIDynamicLoad"
-
+#define TAG "JNITag"
 jstring getMessage(JNIEnv *env,jobject jObject){
     return env->NewStringUTF("this is msg");
 }
@@ -47,5 +48,6 @@ JNIEXPORT int JNICALL JNI_OnLoad(JavaVM *vm,void *reserved){
         return JNI_FALSE;
     }
     registerNativeMethods(env,JAVA_CLASS,gMethods,2);
+    __android_log_print(ANDROID_LOG_INFO, TAG, "helloWorld");
     return JNI_VERSION_1_6;
 }
