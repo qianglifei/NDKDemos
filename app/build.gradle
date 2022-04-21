@@ -21,7 +21,8 @@ android {
             }
         }
         ndk{
-            ldLibs "log", "z", "m"
+            //不加的话  .h文件打log 会报undefined reference to '__android_log_print'
+            ldLibs "log"
         }
     }
 

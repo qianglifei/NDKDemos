@@ -3,6 +3,7 @@
 //#include <>
 #include <People.h>
 #include <base.h>
+#include <android/log.h>
 extern "C"
 JNIEXPORT jstring JNICALL
 Java_com_bksx_mobile_terminal_ndkdemo_MainActivity_stringFromJNI(JNIEnv *env, jobject thiz) {

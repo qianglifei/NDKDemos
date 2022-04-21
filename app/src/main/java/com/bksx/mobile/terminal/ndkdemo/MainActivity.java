@@ -20,8 +20,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Example of a call to a native method
-        JNIDynamicLoad jniDynamicLoad = new JNIDynamicLoad();
-        JNIBasicType jniBasicType = new JNIBasicType();
+        //JNIDynamicLoad jniDynamicLoad = new JNIDynamicLoad();
+        //JNIBasicType jniBasicType = new JNIBasicType();
+        JNIString jniString = new JNIString();
 
         final TextView tv = findViewById(R.id.sample_text);
 
@@ -29,9 +30,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                // tv.setText(jniDynamicLoad.sum(1,4) +"");
-                tv.setText(jniBasicType.callNativeInt(6) +"");
+          //      tv.setText(jniBasicType.callNativeInt(6) +"");
                 //导入头文件
                 //调用示例
+                tv.setText(jniString.callNativeString("你好啊"));
             }
         });
 

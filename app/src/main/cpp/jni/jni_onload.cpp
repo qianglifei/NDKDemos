@@ -48,6 +48,6 @@ JNIEXPORT int JNICALL JNI_OnLoad(JavaVM *vm,void *reserved){
         return JNI_FALSE;
     }
     registerNativeMethods(env,JAVA_CLASS,gMethods,2);
-    __android_log_print(ANDROID_LOG_INFO, TAG, "helloWorld");
+//    __android_log_print(ANDROID_LOG_INFO, TAG, "helloWorld");
     return JNI_VERSION_1_6;
 }

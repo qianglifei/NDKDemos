@@ -52,6 +52,11 @@ add_library(
 #    thread/jni_thread.cpp
 )
 add_library(
+    jni-string
+    SHARED
+    jni/jni_string.cpp
+)
+add_library(
       basic-lib
       SHARED
       jni/jni_basic_type.cpp
@@ -91,6 +96,7 @@ target_link_libraries( # Specifies the target library.
                        base-lib
                        dynamic-lib
                        people-lib
+                       jni-string
         # Links the target library to the log library
                        # included in the NDK.
                        ${log-lib} )
