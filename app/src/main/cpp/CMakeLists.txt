@@ -30,6 +30,9 @@ add_library( # Sets the name of the library.
              SHARED
              # Provides a relative path to your source file(s).
              native-lib.cpp
+             jni/jni_reference_type.cpp
+             jni/jni_access_field.cpp
+             jni/jni_access_method.cpp
         )
 
 add_library(people-lib
@@ -56,6 +59,13 @@ add_library(
     SHARED
     jni/jni_string.cpp
 )
+
+#add_library(
+#        jni-string
+#        SHARED
+#        jni/jni_string.cpp
+#)
+
 add_library(
       basic-lib
       SHARED

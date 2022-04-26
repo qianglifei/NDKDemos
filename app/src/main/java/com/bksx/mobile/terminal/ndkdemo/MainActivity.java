@@ -21,9 +21,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         // Example of a call to a native method
         //JNIDynamicLoad jniDynamicLoad = new JNIDynamicLoad();
+        /**
+         * java与jni基础类型转化
+         */
         //JNIBasicType jniBasicType = new JNIBasicType();
-        JNIString jniString = new JNIString();
-
+        /**
+         * java与jni字符串转化
+         */
+        //JNIString jniString = new JNIString();
+        /**
+         * java与JNI引用类型转换
+         */
+        JNIReferenceType jniReferenceType = new JNIReferenceType();
+        /**
+         * JNI 访问Java 类字段
+         */
+        JNIAccessField jniAccessField = new JNIAccessField();
+        final Animal animal = new Animal("animal");
         final TextView tv = findViewById(R.id.sample_text);
 
         tv.setOnClickListener(new View.OnClickListener() {
@@ -33,7 +47,12 @@ public class MainActivity extends AppCompatActivity {
           //      tv.setText(jniBasicType.callNativeInt(6) +"");
                 //导入头文件
                 //调用示例
-                tv.setText(jniString.callNativeString("你好啊"));
+              //  tv.setText(jniString.callNativeString("你好啊"));
+               // tv.setText(jniReferenceType.callNativeStringArray(strings));
+                //jniAccessField.accessInstanceField(animal);
+                //jniAccessField.accessStaticField(animal);
+                JNIAccessField.staticAccessInstanceField();
+                tv.setText(JNIAccessField.num +"");
             }
         });
 
